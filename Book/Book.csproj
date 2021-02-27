@@ -59,11 +59,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AutoSizeFormUtil.cs" />
     <Compile Include="Util\DataOperationUtil.cs" />
+    <Compile Include="Util\DirectoryFileUtil.cs" />
     <Compile Include="Util\HttpWebUtil.cs" />
     <Compile Include="Util\INIUtil.cs" />
     <Compile Include="Util\ModBusTools.cs" />
     <Compile Include="Util\MxCommuniUtil.cs" />
     <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="Util\TraceUtil.cs" />
     <Compile Include="Util\XmlUtil.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
