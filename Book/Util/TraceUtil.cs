@@ -43,6 +43,12 @@ namespace Book.Util
             Log(message, MessageType.Information, module);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="message">信息</param>
+        /// <param name="type">类型</param>
+        /// <param name="module"></param>
         private void Log(string message, MessageType type, string module)
         {
             Trace.WriteLine(

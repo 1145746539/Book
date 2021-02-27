@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Web.Script.Serialization;
-
+using System.Diagnostics;
 
 namespace Book.Util
 {
@@ -16,8 +16,6 @@ namespace Book.Util
     /// </summary>
     class HttpWebUtil
     {
-
-       //
 
         private static JavaScriptSerializer JSS = new JavaScriptSerializer();
         /// <summary>
@@ -32,54 +30,57 @@ namespace Book.Util
         {
             string returnString = string.Empty;
 
-            HttpWebRequest request = null;//定义一个请求
-            HttpWebResponse response;//定义一个响应
+            HttpWebRequest request = null;//请求
+            HttpWebResponse response;//响应
             Byte[] byteData = postDataStr == null ? new byte[] { } : Encoding.UTF8.GetBytes(postDataStr); //如果发送内容不为空转换为UTF-8格式
             string method = sendWay.ToUpper();//访问方式转换为大写格式
-            switch (method)//判断访问方式
-            {
-                case "POST"://加密提交
-                    request = (HttpWebRequest)WebRequest.Create(url);//创建请求                    
-                    request.Method = method;//传输方式
-                    //"application/json" 资源类型：JSON字符串  "application/x-www-form-urlencoded" 表单数据(键值对)
-                    request.ContentType = contentType;//资源类型
-                    request.ContentLength = byteData.Length;
-                    using (Stream requestStream = request.GetRequestStream())//获取请求流
-                    {
-                        requestStream.Write(byteData, 0, byteData.Length);//向服务器写字节流
-                    }
-                    break;
-                case "GET"://明文提交
-                    request = (HttpWebRequest)WebRequest.Create(url + (postDataStr == null ? "" : "?") + postDataStr);
-                    request.Method = method;
-                    break;
-            }
             try
             {
+                switch (method)//判断访问方式
+                {
+                    case "POST"://加密提交
+                        request = (HttpWebRequest)WebRequest.Create(url);//创建请求                    
+                        request.Method = method;//传输方式
+                                                //"application/json" 资源类型：JSON字符串  "application/x-www-form-urlencoded" 表单数据(键值对)
+                        request.ContentType = contentType;//资源类型
+                        request.ContentLength = byteData.Length;
+                        using (Stream requestStream = request.GetRequestStream())//获取请求流
+                        {
+                            requestStream.Write(byteData, 0, byteData.Length);//向服务器写字节流
+                        }
+                        break;
+                    case "GET"://明文提交
+                        request = (HttpWebRequest)WebRequest.Create(url + (postDataStr == null ? "" : "?") + postDataStr);
+                        request.Method = method;
+                        break;
+                }
+
                 response = (HttpWebResponse)request.GetResponse();//获取服务器响应信息
+
+                HttpStatusCode code = response.StatusCode;  //ok
+                string stute = code.ToString();
+                int id = (int)code;
+
+
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    returnString = reader.ReadToEnd();
+                }
             }
             catch (WebException ex)
             {
-                response = (HttpWebResponse)ex.Response;//获取响应异常信息
+                Trace.WriteLine(string.Format("{0},{1},{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                "Error", ex.Message));
+               
             }
-            HttpStatusCode code = response.StatusCode;  //ok
-            string stute = code.ToString();
-            int id = (int)code;
-
-
-            using (Stream responseStream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                returnString = reader.ReadToEnd();
-            }
-
 
             return returnString;
         }
 
 
         /// <summary>
-        /// value==null?实例化对象转json string：json string转实例化对象；
+        /// value==null ? 实例化对象转json string：json string转实例化对象；
         /// （new对象,null） or (new对象，string)
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -92,19 +93,18 @@ namespace Book.Util
             try
             {
                 if (value != null)
-                {
                     result = JSS.Deserialize<T>(value);
-                }
+                
                 else
-                {
                     result = JSS.Serialize(transFormation);
 
-                }
+                
             }
             catch (Exception ex)
             {
                 result = ex.Message;
-                //WriteLogHelper.WriteOrCreateLog(null, ex.Message.ToString());
+                Trace.WriteLine(string.Format("{0},{1},{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                "Error", ex.Message));
             }
             return result;
         }
