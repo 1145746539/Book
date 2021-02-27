@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActUtlTypeLib">
+      <HintPath>..\DLL\ActUtlTypeLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
@@ -53,7 +57,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\AutoSizeFormUtil.cs" />
+    <Compile Include="Util\DataOperationUtil.cs" />
     <Compile Include="Util\HttpWebUtil.cs" />
+    <Compile Include="Util\INIUtil.cs" />
+    <Compile Include="Util\ModBusTools.cs" />
+    <Compile Include="Util\MxCommuniUtil.cs" />
+    <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="Util\XmlUtil.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
