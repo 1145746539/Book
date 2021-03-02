@@ -13,6 +13,15 @@ namespace Book
         [STAThread]
         static void Main()
         {
+            //判断程序有没有打开
+            bool isAppRunning = false;
+            System.Threading.Mutex mutex = new System.Threading.Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName, out isAppRunning);
+            if (!isAppRunning)
+            {
+                MessageBox.Show("程序已运行，不能再次打开！");
+                Environment.Exit(1);
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
