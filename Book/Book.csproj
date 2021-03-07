@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ActUtlTypeLib">
       <HintPath>..\DLL\ActUtlTypeLib.dll</HintPath>
@@ -80,6 +89,12 @@
     <Compile Include="高级控件\对话框\FormDialogue.Designer.cs">
       <DependentUpon>FormDialogue.cs</DependentUpon>
     </Compile>
+    <Compile Include="高级控件\菜单和工具栏\MenuBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="高级控件\菜单和工具栏\MenuBar.Designer.cs">
+      <DependentUpon>MenuBar.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,7 +111,11 @@
     <EmbeddedResource Include="高级控件\对话框\FormDialogue.resx">
       <DependentUpon>FormDialogue.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="高级控件\菜单和工具栏\MenuBar.resx">
+      <DependentUpon>MenuBar.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +126,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\imageres_2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageres_3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageres_5355.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageres_98.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageres_185.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
