@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Book.高级控件.对话框;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -24,7 +25,9 @@ namespace Book
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new FormDialogue());
+
+           // Application.Run(new Main());
         }
     }
 }
