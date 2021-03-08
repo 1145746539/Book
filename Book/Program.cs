@@ -1,4 +1,5 @@
-﻿using Book.Util;
+﻿using Book.高级控件.对话框;
+using Book.高级控件.菜单栏;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,12 @@ namespace Book
                 Environment.Exit(1);
             }
 
-            //new SqliteUtil().CreateDB(@"D:\C#\TDB.db");
-            //new SqliteUtil().CreateDB(@"D:\C#\TDB.db","admin");
-            new SqliteUtil().ConnectDB(@"D:\C#\TDB.db", "admin");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new MenuBarcs());
+
+            //Application.Run(new FormDialogue());
+            // Application.Run(new Main());
         }
     }
 }
