@@ -72,6 +72,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UControl\InformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControl\InformationControl.Designer.cs" />
     <Compile Include="Util\AutoSizeFormUtil.cs" />
     <Compile Include="Util\DataOperationUtil.cs" />
     <Compile Include="Util\DirectoryFileUtil.cs" />
@@ -108,6 +112,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UControl\InformationControl.resx" />
     <EmbeddedResource Include="高级控件\对话框\FormDialogue.resx">
       <DependentUpon>FormDialogue.cs</DependentUpon>
     </EmbeddedResource>
