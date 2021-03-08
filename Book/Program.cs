@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Book.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,6 +23,9 @@ namespace Book
                 Environment.Exit(1);
             }
 
+            //new SqliteUtil().CreateDB(@"D:\C#\TDB.db");
+            //new SqliteUtil().CreateDB(@"D:\C#\TDB.db","admin");
+            new SqliteUtil().ConnectDB(@"D:\C#\TDB.db", "admin");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Book.Util
 {
@@ -64,6 +64,16 @@ namespace Book.Util
         {
             try
             {
+                //获取使用者方法名与类名
+                MethodBase method = new StackFrame(true).GetMethod();
+               // string name = this.GetType().Name;
+
+                //获取调用者方法名与类名
+                MethodBase methodBase = new StackTrace().GetFrame(1).GetMethod();
+                string className = methodBase.ReflectedType.FullName;
+
+
+
                 DateTime dt = DateTime.Now;
                 fileName = dt.ToString("yyyyMMdd") + ".txt";
                 string filePathEnd = path ?? filePath;  //path为空时返回filePath , 不为空返回本身

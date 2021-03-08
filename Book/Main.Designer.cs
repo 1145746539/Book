@@ -30,19 +30,27 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel_show = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panel_show
+            // 
+            this.panel_show.Location = new System.Drawing.Point(602, 2);
+            this.panel_show.Name = "panel_show";
+            this.panel_show.Size = new System.Drawing.Size(182, 312);
+            this.panel_show.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 273);
+            this.ClientSize = new System.Drawing.Size(784, 316);
+            this.Controls.Add(this.panel_show);
             this.Name = "Main";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -52,6 +60,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panel_show;
     }
 }
 

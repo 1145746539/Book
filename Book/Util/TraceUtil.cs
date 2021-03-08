@@ -1,46 +1,53 @@
-﻿using System;
-using System.Diagnostics;
+﻿/*
+ * 1.右键项目添加应用程序配置文件
+ * 2.添加节点 system.diagnostics
+ * */
 
 /// <summary>
 /// 日志类库
 /// </summary>
 namespace Book.Util
 {
+    using System;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Text;
 
-    public class TraceHelper
+    public class TraceUtil
     {
-        private static TraceHelper _traceHelper;
+        private static TraceUtil _traceHelper;
 
-        private TraceHelper()
+        private TraceUtil()
         {
+
         }
 
-        public static TraceHelper GetInstance()
+        public static TraceUtil GetInstance()
         {
             if (_traceHelper == null)
-                _traceHelper = new TraceHelper();
+                _traceHelper = new TraceUtil();
 
             return _traceHelper;
         }
 
-        public void Error(string message, string module)
+        public void Error(string message)
         {
-            Log(message, MessageType.Error, module);
+            Log(message, MessageType.Error);
         }
 
-        public void Error(Exception ex, string module)
+        public void Error(Exception ex)
         {
-            Log(ex.StackTrace, MessageType.Error, module);
+            Log(ex.StackTrace, MessageType.Error);
         }
 
-        public void Warning(string message, string module)
+        public void Warning(string message)
         {
-            Log(message, MessageType.Warning, module);
+            Log(message, MessageType.Warning);
         }
 
-        public void Info(string message, string module)
+        public void Info(string message)
         {
-            Log(message, MessageType.Information, module);
+            Log(message, MessageType.Information);
         }
 
         /// <summary>
@@ -48,14 +55,28 @@ namespace Book.Util
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="type">类型</param>
-        /// <param name="module"></param>
-        private void Log(string message, MessageType type, string module)
+        private void Log(string message, MessageType type)
         {
-            Trace.WriteLine(
-                string.Format("{0},{1},{2},{3}",
-                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            //获取使用者方法名与类名
+            //MethodBase method = new StackFrame(true).GetMethod();
+            //string name = this.GetType().Name;
+
+            ////获取调用者方法名与类名
+            //MethodBase methodBase = new System.Diagnostics.StackTrace().GetFrame(1).GetMethod();
+            //string className = methodBase.ReflectedType.FullName;
+
+            StackTrace stack = new StackTrace();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < stack.FrameCount; i++)
+            {
+                MethodBase meth = stack.GetFrame(i).GetMethod();
+                sb.Append(meth.ReflectedType.FullName + "=" + meth.Name + "--");
+            }
+
+
+            Trace.WriteLine(string.Format("{0},{1},{2},{3}",DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                 type.ToString(),
-                module,
+                sb.ToString(),
                 message));
         }
     }
