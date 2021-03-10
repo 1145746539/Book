@@ -1,6 +1,13 @@
 ﻿/*
  * 1.右键项目添加应用程序配置文件
- * 2.添加节点 system.diagnostics
+ * 2.添加节点 system.
+ * <system.diagnostics>
+    <trace autoflush="true" indentsize="0">
+      <listeners>
+        <add name="LogListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="LogConsoleApp.log"/>
+      </listeners>
+    </trace>
+  </system.diagnostics>
  * */
 
 /// <summary>
